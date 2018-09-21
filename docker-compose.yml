@@ -18,11 +18,15 @@ services:
     volumes:
       - certs:/etc/nginx/certs:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    volumes_from:
-      - nginx-proxy
   whoami:
     image: jwilder/whoami
     environment:
       - VIRTUAL_HOST=whoami.local
       - LETSENCRYPT_HOST=whoami.local,www.whoami.local,mail.whoami.local
       - LETSENCRYPT_EMAIL=contact@whoami.local
+
+volumes:
+  certs:
+    driver: local-persist
+    driver_opts:
+      mountpoint: certs
