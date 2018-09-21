@@ -18,7 +18,8 @@ services:
     volumes:
       - certs:/etc/nginx/certs:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    volumes_from: nginx-proxy
+    volumes_from:
+      - nginx-proxy
   whoami:
     image: jwilder/whoami
     environment:
